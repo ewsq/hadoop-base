@@ -69,7 +69,7 @@ public class HdfsService {
         try {
             fileSystem = getFileSystem();
             String hdfsPath = generateHdfsPath(path);
-            // 创建目录
+            //创建目录
             return fileSystem.mkdirs(new Path(hdfsPath));
         } catch (IOException e) {
             logger.error(MessageFormat.format("创建HDFS目录失败，path:{0}", path), e);

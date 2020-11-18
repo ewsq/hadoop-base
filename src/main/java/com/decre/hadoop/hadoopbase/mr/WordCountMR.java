@@ -24,9 +24,11 @@ public class WordCountMR {
 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+        //此配置仅在window调试环境中需要，由于hadoop-common需要找到winutils.exe,其实找不到也可以正常操作hadoop文件，但就是启动的时候会报“Could not locate executable null\bin\winutils.exe in the Hadoop binaries”
+        System.setProperty("hadoop.home.dir", "D:\\hadoop-3.3.0");
         // TODO 怎么动态读取configuration
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "hdfs://192.168.0.125:9000");
+        conf.set("fs.defaultFS", "hdfs://hbmaster:9000");
         // 通过conf获取job对象，该对象会组织所有的该MapReduce程序的所有组件
         Job job = Job.getInstance(conf);
 
@@ -150,7 +152,7 @@ public class WordCountMR {
      * @since 1.0.0
      */
     private  static String generateHdfsPath(String dstPath) {
-        String hdfsPath = "hdfs://192.168.0.125:9000";
+        String hdfsPath = "hdfs://hbmaster:9000";
         if (dstPath.startsWith("/")) {
             hdfsPath += dstPath;
         } else {

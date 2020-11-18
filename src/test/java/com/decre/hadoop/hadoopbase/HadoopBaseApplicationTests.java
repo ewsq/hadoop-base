@@ -1,6 +1,6 @@
 package com.decre.hadoop.hadoopbase;
 
-import com.decre.hadoop.hadoopbase.entity.User;
+import com.decre.common.entity.User;
 import com.decre.hadoop.hadoopbase.service.HdfsService;
 import org.apache.hadoop.fs.BlockLocation;
 import org.apache.hadoop.fs.FSDataInputStream;
@@ -36,6 +36,7 @@ public class HadoopBaseApplicationTests {
 
         boolean result2 = hdfsService.mkdir("/out");
         System.out.println("创建结果：" + result2);
+
     }
 
     /**
@@ -43,9 +44,9 @@ public class HadoopBaseApplicationTests {
      */
     @Test
     public void testUploadFile() {
-        hdfsService.uploadFileToHdfs("D:\\ITape\\test\\input\\hadoop1.txt", "/input");
+        hdfsService.uploadFileToHdfs("D:\\tmp\\001.jpg", "/input");
         //hdfsService.uploadFileToHdfs(false, true, "D:\\ITape\\test\\hadoop2.txt", "/testDir");
-        hdfsService.uploadFileToHdfs("D:\\ITape\\test\\input\\hadoop3.txt", "/input");
+        hdfsService.uploadFileToHdfs("D:\\tmp\\002.jpg", "/input");
 
     }
 
@@ -55,7 +56,7 @@ public class HadoopBaseApplicationTests {
     @Test
     public void testListFiles() {
 
-        List<Map<String, Object>> result = hdfsService.listFiles("/testDir", null);
+        List<Map<String, Object>> result = hdfsService.listFiles("/tmp/input", null);
         result.forEach(map -> {
             map.forEach((k, v) -> {
                 System.out.println(k + "--" + v);
@@ -69,7 +70,7 @@ public class HadoopBaseApplicationTests {
      */
     @Test
     public void testDownloadFile() {
-        hdfsService.downloadFileFromHdfs("/output/part-r-00000", "wordcount1");
+        hdfsService.downloadFileFromHdfs("/output/001.jpg", "wordcount1");
     }
 
     /**
@@ -79,7 +80,7 @@ public class HadoopBaseApplicationTests {
      */
     @Test
     public void testOpen() throws IOException {
-        FSDataInputStream inputStream = hdfsService.open("/output/part-r-00000");
+        FSDataInputStream inputStream = hdfsService.open("/output/001.jpg");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = null;

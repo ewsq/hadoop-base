@@ -1,11 +1,15 @@
-
+server:
+  port: 3101
 hdfs:
-  defaultFS: hdfs://mycluster
+  defaultFS: hdfs://hbmaster:9000/tmp
+  hadoop_home_dir: D:\\hadoop-3.3.0 #此配置仅在window调试环境中需要，由于hadoop-common需要找到winutils.exe,其实找不到也可以正常操作hadoop文件，但就是启动的时候会报“Could not locate executable null\bin\winutils.exe in the Hadoop binaries”
+
 # spring cache 所用的redis配置
 spring:
   redis:
     host: 127.0.0.1
-    password: 123456
+    port: 6379
+    password:
     timeout: 10000
     database: 0
     lettuce:

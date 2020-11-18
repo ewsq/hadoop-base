@@ -20,7 +20,7 @@ public class HBaseTestUtils {
 
     public static Connection conn = null;
 
-    String hbhost = "192.168.0.125";
+    String hbhost = "192.168.10.150";
 
     private static HBaseTestUtils instance = null;
 

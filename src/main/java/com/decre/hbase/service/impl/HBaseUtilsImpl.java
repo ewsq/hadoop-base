@@ -19,12 +19,14 @@ import java.io.IOException;
 public class HBaseUtilsImpl extends HBaseUtils {
 
     private static final String ZK_CONNECT_KEY = "hbase.zookeeper.quorum";
-    private static final String ZK_CONNECT_VALUE = "hadoop1:2181,hadoop2:2181,hadoop3:2181";
+    private static final String ZK_CONNECT_VALUE = "hbslaver01:2181,hbslaver02:2181,hbslaver03:2181";
 
     private static Connection conn = null;
     private static Admin admin = null;
 
     public static void main(String[] args) throws Exception {
+        //此配置仅在window调试环境中需要，由于hadoop-common需要找到winutils.exe,其实找不到也可以正常操作hadoop文件，但就是启动的时候会报“Could not locate executable null\bin\winutils.exe in the Hadoop binaries”
+        System.setProperty("hadoop.home.dir", "D:\\hadoop-3.3.0");
 
         getConnection();
         getAdmin();
@@ -32,20 +34,20 @@ public class HBaseUtilsImpl extends HBaseUtils {
         HBaseUtilsImpl hbu = new HBaseUtilsImpl();
 
 
-        //hbu.getAllTables();
+        hbu.getAllTables();
 
-        //hbu.descTable("people");
+        hbu.descTable("people");
 
-        //String[] infos = {"info","family"};
-        //hbu.createTable("people", infos);
+        String[] infos = {"info","family"};
+        hbu.createTable("people", infos);
 
-        //String[] add = {"cs1","cs2"};
-        //String[] remove = {"cf1","cf2"};
+        String[] add = {"cs1","cs2"};
+        String[] remove = {"cf1","cf2"};
 
-        //HColumnDescriptor hc = new HColumnDescriptor("sixsixsix");
+        HColumnDescriptor hc = new HColumnDescriptor("sixsixsix");
 
         //hbu.modifyTable("stu",hc);
-        //hbu.getAllTables();
+        hbu.getAllTables();
 
 
         hbu.putData("huoying", "rk001", "cs2", "name", "aobama", System.currentTimeMillis());
